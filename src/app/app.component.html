@@ -1,0 +1,40 @@
+<section class="todoapp">
+  <header class="header">
+    <div class="col-lg">
+      <h1>Todos</h1>
+    </div>
+  </header>
+  <section class="main" *ngIf="todos.length > 0">
+    <div class="col-md-3">
+      <input class="form-control" [(ngModel)]="searchText" placeholder="search text goes here">
+    </div>
+    <br>
+    <ul class="todo-list">
+      <li *ngFor="let todo of todos | filter : searchText" [class.completed]="todo.complete">
+          <label class="form-check-label">
+            <input class="form-check" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+          </label>
+        {{todo.title}}
+        <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeTodo(todo.id)">X
+        </button>
+      </li>
+    </ul>
+  </section>
+
+  <section class="col-lg">
+    <div class="form-group row">
+      <div class="col-md-3">
+        <input class="form-control" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title">
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-primary btn-remove-sign" (click)="addTodo()">Add</button>
+      </div>
+    </div>
+  </section>
+  <footer class="footer col-lg" *ngIf="todos.length > 0">
+    <span class="todo-count"><strong>Total: {{todos.length}}, complete {{countCompleteTodo}}</strong></span>
+
+  </footer>
+
+
+</section>
